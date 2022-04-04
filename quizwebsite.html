@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <!-- <link rel="stylesheet" href="quiz.css"> -->
+    <style> *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-weight: 300;
+    } 
+    html{
+        font-size: 62.5%;
+        background:radial-gradient(#fff,#ffd6d6);
+    }
+    
+     .maindiv{
+         width: 100vh; 
+         min-height: 100vh; 
+        margin:auto;
+        display:grid;
+        place-items: center;
+        
+    } 
+    
+    .innerdiv{
+        width:40vw;
+        background-color: #fff;
+        padding-top: 15px;
+      padding-right: 25px;
+      padding-bottom: 15px;
+      padding-left: 13px;
+        border-radius: 25px 25px ;
+        box-shadow: 1.5rem 1.5rem 1rem  rgba(0,0,0,0.4);
+      height: fit-content;
+      
+    }
+    
+    .innerdiv h2{
+        font-size: 3rem;
+        font-weight: 300;
+        margin-bottom:2.5rem;
+        
+    
+    }
+    .innerdiv li{
+        font-size: 2.4rem;
+        margin-top: 1.5rem;
+        list-style: none;
+    }
+    input {
+        cursor: pointer;
+    }
+    
+    #submit, .btn{
+        padding: 1rem 3rem;
+        outline: none;
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin: auto;
+        display: block;
+        margin-top: 4rem;
+         border-radius: 255px 15px ; 
+         color:black;
+        background-color:rgba(0,0,0,0.4);
+    
+    }
+    #submit:hover{
+        background-color: grey;
+    }
+    
+    #showscore{
+        background-color: grey;
+        margin-top: 1rem;
+        padding: 3rem 4rem;
+        box-shadow: 0 1rem -0.7rem rgba(0,0,0,0.4);
+    
+    }
+    #showscore .btn{
+        margin-top: 2rem;
+        background-color: #55efc4;
+        color:black;
+    }
+    #showscore .btn:hover{
+        cursor: pointer;
+        
+        background-color: #55efc4;
+        color:#fff;
+    }
+    #showscore h3{
+        font-size: 3rem;
+        text-align: center;
+    }
+    /* .scorearea{ */
+        /* display: */
+    /* } */</style>
+
+</head>
+
+<body>
+
+    <div class="maindiv">
+        <div  class="innerdiv">
+
+            <h2 class="question">Question is here:</h2>
+            <ul>
+                <li>
+                    <input type="radio" name="answer" id="ans1" class ="answer">
+                    <label for="ans1" id="option1">Answer option</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="ans2" class ="answer">
+                    <label for="ans2" id="option2">Answer option</label>
+
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="ans3" class ="answer">
+                    <label for="ans3" id="option3">Answer option</label>
+
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="ans4" class ="answer">
+                    <label for="ans4" id="option4">Answer option</label>
+
+                </li>
+                
+                
+            </ul>
+            <button id="submit">Submit</button>
+            <div id="showscore">
+
+            </div>
+
+        </div>
+    </div>
+    <script>const quiz = [{
+        question: "  Name of the screen that recognizes touch input is :",
+        a: " Recog Screen",
+        b: "Point Screen",
+        c: "Touch Screen",
+        d: " Android Screen",
+        ans: "ans3"
+    },
+    {
+        question: "What is the fullform of CSS?",
+        a: "Cascading Style Sheets",
+        b: "Cascading Style Sheep",
+        c: "Cartoon Style Sheep",
+        d: "Cascading Super Sheets",
+        ans: "ans1"
+    },
+    {
+        question: "Arrange in ascending order the units of memory TB, KB, GB, MB:",
+        a: "TB>MB>GB>KB",
+        b: "MB>GB>TB>KB",
+        c: "TB>GB>MB>KB",
+        d: "GB>MB>KB>TB",
+        ans: "ans3"
+    },
+    {
+        question: "Which one of these stores more data than a DVD ?",
+        a: "CD Rom",
+        b: "Blue Ray Disk",
+        c: "Floppy",
+        d: "Red Ray disk",
+        ans: "ans2"
+    },
+    
+    {
+        question: "What does HTML stand for?",
+        a: "Hyperlinks and Text Markup Language",
+        b: "Hyper Text Markup Language",
+        c: "Home Tool Markup Language",
+        d: "Hiper text language",
+        ans: "ans2"
+    
+    }
+    
+    ];
+    
+    
+    
+    const question = document.querySelector('.question');
+    const option1 = document.querySelector('#option1');
+    const option2 = document.querySelector('#option2');
+    const option3 = document.querySelector('#option3');
+    const option4 = document.querySelector('#option4');
+    const submit = document.querySelector('#submit');
+    const answers = document.querySelectorAll('.answer');
+    const showscore = document.querySelector('#showscore');
+    let score = 0;
+    
+    let questionCount = 0;
+    const loadQuestion = () => {
+        const questionList = quiz[questionCount];
+        question.innerText = questionList.question;
+        option1.innerHTML = questionList.a;
+        option2.innerHTML = questionList.b;
+        option3.innerHTML = questionList.c;
+        option4.innerHTML = questionList.d;
+    
+    }
+    
+    loadQuestion();
+    alert(
+        "All The Best!!!!"
+    );
+    let getCheckedAnswer = () => {
+        let answer;
+        answers.forEach((curAnsElem) => {
+            if (curAnsElem.checked) {
+                answer = curAnsElem.id;
+            }
+        });
+        return answer;
+    };
+    const deselectAll = () => {
+        answers.forEach((curAnsElem) => curAnsElem.checked = false);
+    }
+    // let marks =()=>{
+    //     if(score<2){
+    //         <h1>Bad Score,try again!</h1>
+    //     }
+    //     else if( score==3){
+    //         <h1>Better :)</h1>
+        
+    //     }
+    //     else{
+    //     <h1>Good Work ;)</h1>
+    //     }
+    // }
+    console.log("hello");
+    
+    submit.addEventListener('click', () => {
+        let checkedAnswer = getCheckedAnswer();
+        console.log(checkedAnswer);
+        if (checkedAnswer === quiz[questionCount].ans) {
+            score++;
+        }
+        questionCount++;
+        deselectAll();
+        if (questionCount < quiz.length) {
+            loadQuestion();
+        } else {
+            showscore.innerHTML = `
+             <h3>YOU'VE SCORED ${score}/${quiz.length}</h3>
+            
+             <button class="btn" onclick="location.reload()">Play Again?</button>
+             `;
+        }
+        
+    }
+    
+    );
+    // marks();
+    
+    
+    
+    
+    
+    
+    
+    </script>
+    
+    
+
+
+</body>
+
+</html>
